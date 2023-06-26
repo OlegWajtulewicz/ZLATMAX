@@ -1,0 +1,443 @@
+// Заголовки, загальні БЕМ блоки та інше...
+
+//=======================
+.products-slider {
+    &__header {
+        &:not(:last-child) {
+            @include adaptiveValue("margin-bottom", 50, 30);
+        }
+        @media (min-width: $mobile) {
+            display: flex;
+            align-items: center;
+            justify-content: space-between;
+            gap: rem(20);
+        }
+    }
+    &__title {
+        font-size: rem(30);
+        line-height: math.div(46, 30);
+        font-weight: 700;
+        letter-spacing: 0.05em;
+    }
+    &__more {
+        font-size: rem(18);
+        font-weight: 600;
+        color: rgba(20, 20, 20, .58);
+        transition: color .3s ease 0s;
+        display: inline-flex;
+        gap: em(15, 18);
+        &::after {
+            content: "\e900";
+            font-family: 'icomoon' !important;
+            color: $mainOrange;
+            transform: rotate(-90deg) !important;
+            font-size: em(15, 18);
+        }
+        @media (any-hover: hover) {
+            &:hover {
+                color: rgba(20, 20, 20, 1); 
+            }
+        }
+    }
+    &__slider {
+        padding: rem(15) rem(20);
+        margin: 0 rem(-20);
+    }
+    &__swiper {
+        &:not(:last-child) {
+            margin-bottom: rem(50);
+        }
+    }
+    &__dotts {
+        display: grid;
+        grid-auto-flow: column;      
+        //gap: rem(15);
+        transform: translate(0px, 10%);
+        justify-content: center;
+        margin: 0 auto;
+        overflow: hidden;
+        .swiper-pagination-bullet {
+            margin: 0 rem(7.5);
+            cursor: pointer;
+            height: rem(40);
+            width: rem(18);
+            position: relative;
+            transition: all .3s ease 0s;
+            &::after {
+                content: '';
+                height: rem(2);
+                background-color: rgba(137, 137, 137, 1);
+                transition: all .3s ease 0s;
+                position: absolute;
+                width: 100%;
+                top: 50%;
+                transform: translate(0px, -50%);
+            }
+            &::before {
+                content: '';
+                position: absolute;
+                background-color: $mainOrange;
+                width: rem(10);
+                height: rem(10);
+                top: 50%;
+                transform: translate(0px, -50%);
+                left: 0;
+                border-radius: 50%;
+                transition: left 3s linear 0s;
+                opacity: 0;
+            }
+            
+        }
+        .swiper-pagination-bullet-active {
+            width: rem(30);
+            &::after {   
+                background-color: $mainOrange;         
+            }
+            &::before {
+                opacity: 1;
+                left: rem(8);
+                transition: left 3s linear 0s;
+            }
+        }
+    }
+}
+.product-card {
+    position: relative;
+    overflow: hidden;
+    background-color: #fff;
+    display: grid;
+    height: 100%;
+    grid-template-rows: auto 1fr;
+    box-shadow: 0px 4px 20px rgba(0, 0, 0, 0.1);
+    transition: box-shadow .3s ease 0s;
+    @media (any-hover: hover) {
+        &:hover {
+            box-shadow: 0px 4px 25px rgba(0, 0, 0, 0.2);
+        }
+    }
+    &__sale {
+        position: absolute;
+        top: rem(20);
+        left: 0;
+        color: #fff;
+        background-color: $mainOrange;
+        padding: rem(6) rem(22);
+        z-index: 10;
+        pointer-events: none;
+    }
+    &__image {
+        @include adaptiveValue("padding-top", 25, 15);
+        @include adaptiveValue("padding-bottom", 25, 15);
+        @include adaptiveValue("padding-left", 50, 15);
+        @include adaptiveValue("padding-right", 50, 15);
+        img {
+            width: 100%;
+        }
+    }
+    &__item-image-ibg {
+        display: block;
+        padding-bottom: percent(240, 270); 
+    }
+    &__body {
+        padding: rem(20);
+        display: flex;
+        flex-direction: column;
+    }
+    &__title {
+        flex: 1 1 auto;
+        font-weight: 600;
+        font-size: rem(20);
+        line-height: math.div(34, 20);
+        &:not(:last-child) {
+            margin-bottom: em(10, 20);
+        }
+        @media (any-hover: hover) {
+            &:hover {
+                text-decoration: underline;
+            }
+        }
+    }
+    &__info {
+        &:not(:last-child) {
+            margin-bottom: em(10, 15);
+        }
+    }
+    &__rating {
+        justify-content: space-between;
+        &:not(:last-child) {
+            margin-bottom: rem(26);
+        }
+    }
+    &__footer {
+        border-top: 1px solid rgba(20, 20, 20, 0.5);
+        padding: rem(20) 0;
+        display: flex;
+        align-items: center;
+        gap: rem(15);
+    }
+    &__price {
+        flex: 1 1 auto;
+        font-weight: 600;
+        font-size: rem(20);
+        line-height: math.div(34, 20);
+    }
+    &__favorite,
+    &__compare {
+        font-size: rem(24);
+        transition: color .3s ease 0s;
+        @media (any-hover: hover) {
+            &:hover {
+                color: $mainOrange;
+            }
+        }
+    }
+    &__cart {
+        width: 100%;
+        position: relative;
+        padding-left: rem(30);
+        display: flex !important;
+        flex-direction: row-reverse;
+        justify-content: center;
+        gap: rem(16);
+        span {
+            position: relative;
+            font-family: $fontFamily !important;
+        }
+    }
+}
+.info-product-card {
+    color: #ababab;
+    display: flex;
+    justify-content: space-between;
+    gap: rem(10);
+    font-size: rem(16);
+    &__materials {
+        text-align: right;
+    }
+}
+
+//=====================================================================================================================
+.product-new {
+    background: url("@img/new-products/bg.jpg") bottom / cover no-repeat;
+    padding: rem(45) 0 0 0;
+    position: relative;
+    &::before {
+        content: '';
+        background-color:#fff;
+        position: absolute;
+        height: 45px;
+        right: 0;
+        top: 0;
+        width: percent(1030, 1920);
+    }
+    &__inner {
+        @include adaptiveValue("padding-top", 55, 20);
+        @include adaptiveValue("padding-bottom", 55, 20);
+    }
+    &__container {
+        display: grid;
+        row-gap: 30px;
+        @media (min-width: $tablet) {
+            grid-template-columns: rem(400) 1fr;
+            align-items: start;
+        }
+    }
+    &__body {
+        @include adaptiveValue("padding-right", 70, 20);
+    }
+    &__title {
+        color: #fff;
+        font-size: rem(30);
+        font-weight: bold;
+        line-height: math.div(46, 30);
+        &:not(:last-child) {
+            margin-bottom: em(30, 30);
+        }
+    }
+    &__text {
+        color: rgba(255, 255, 255, 0.7);
+        font-size: rem(18);
+        line-height: math.div(27, 18);
+        letter-spacing: 0.03em;
+        &:not(:last-child) {
+            @include adaptiveValue("margin-bottom", 60, 20);
+        }
+    }
+    &__content {
+        min-width: 0;
+        @media (min-width: $tablet) {
+            padding: rem(37) 0 0 0;
+        }
+        
+    }
+    &__swiper {
+        &:not(:last-child) {
+            @include adaptiveValue("margin-bottom", 50, 30);
+        }
+    }
+    &__dotts {
+        position: relative;
+        z-index: 3;
+    }
+}
+//====================================
+.link-arrow {
+    display: flex;
+    flex-direction: row-reverse;
+    justify-content: flex-end;
+    align-items: center;
+    color: $mainOrange;
+    font-size: rem(20);
+    font-family: $fontFamily !important;
+    font-weight: 600;
+    &::before {
+        margin: 0 0 0 em(15, 20);
+        font-family: 'icomoon' !important;
+        transform: rotate(-90deg);
+        font-size: rem(15); 
+    }
+    @media (any-hover: hover) {
+        &:hover {
+            span {
+                text-decoration: underline;
+                transition: all .3s ease 0s;
+            }
+        }
+    }
+}
+.dotts {
+    display: grid;
+    grid-auto-flow: column;
+    justify-content: center;
+    margin: 0 auto;
+    overflow: hidden;
+    .swiper-pagination-bullet {
+        margin: 0 rem(7.5);
+        cursor: pointer;
+        height: rem(40);
+        width: rem(18);
+        position: relative;
+        transition: all .3s ease 0s;
+        &::after {
+            content: '';
+            height: rem(2);
+            background-color: rgba(137, 137, 137, 1);
+            transition: all .3s ease 0s;
+            position: absolute;
+            width: 100%;
+            top: 50%;
+            transform: translate(0px, -50%);
+        }
+        &::before {
+            content: '';
+            position: absolute;
+            background-color: $mainOrange;
+            width: rem(10);
+            height: rem(10);
+            top: 50%;
+            transform: translate(0px, -50%);
+            left: 0;
+            border-radius: 50%;
+            transition: left 3s linear 0s;
+            opacity: 0;
+        }
+        
+    }
+    .swiper-pagination-bullet-active {
+        width: rem(30);
+        &::after {   
+            background-color: $mainOrange;         
+        }
+        &::before {
+            opacity: 1;
+            left: rem(8);
+            transition: left 3s linear 0s;
+        }
+    }
+}
+//======================================================================================================
+.breadcrumbs {
+    white-space: nowrap;
+    overflow: auto;
+    height: rem(22);
+    &__list {
+        display: flex;
+    }
+    &__link {
+        opacity: .5;
+        display: flex;
+        align-items: center;
+        &::after {
+            content: "\e900";
+            font-family: 'icomoon' !important;
+            transform: rotate(-90deg);
+            font-size: rem(8);
+            margin: 0 em(10, 8);
+        }
+    }
+    &__current {
+        color: $mainOrange;
+    }
+}
+//======================================
+.title {
+    font-weight: 700;
+    font-size: rem(24);
+    line-height: math.div(29, 24);
+    &:not(:last-child) {
+        margin-bottom: em(25, 24);
+    }
+}
+//=======================================================================
+.pagging {
+    display: flex;
+    justify-content: flex-end;
+    align-items: center;
+    gap: rem(30);
+    @include adaptiveValue("gap", 30, 15);
+    &__arrow {
+        color: $mainOrange;
+        &::before {
+            font-size: rem(10);
+        }
+        &:disabled {
+            color: rgba(0, 0, 0, 0.22);
+        }
+        &_left {
+            transform: rotate(90deg);
+        }
+        &_right {
+            transform: rotate(-90deg);
+        }
+    }
+
+    &__list {
+        display: flex;
+        align-items: center;
+        gap: rem(13);
+    }
+    &__link {
+        width: rem(34);
+        height: rem(34);
+        display: flex;
+        justify-content: center;
+        align-items: center;
+        border-radius: 50%;
+        &._active {
+            background-color: $mainOrange;
+            color: #fff;
+        }
+        &:hover {
+            background-color: $mainOrange;
+            color: #fff;
+        }
+    }
+
+
+}
+
+//=========================
+//=========================
+.similar {
+    display: none;
+}

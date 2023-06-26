@@ -1,0 +1,184 @@
+.catalog {
+    @include adaptiveValue("padding-bottom", 120, 40);
+    
+    &__body {
+        display: grid;
+        align-items: start;
+        gap: rem(30);
+        @media (min-width: $tablet) {
+            grid-template-columns: rem(375) 1fr;
+        }
+    }
+    
+    &__control {
+        display: flex;
+        justify-content: flex-end;
+        &:not(:last-child) {
+            margin-bottom: rem(20);
+        }
+    }
+    &__products {
+        display: grid;
+        grid-template-columns: repeat(auto-fit, minmax(rem(290), 1fr));
+        gap: rem(30);
+        &:not(:last-child) {
+            @include adaptiveValue("margin-bottom", 60, 30);
+        }
+    }
+
+    &__footer {
+        display: flex;
+        justify-content: space-between;
+        gap: rem(20);
+        @media (max-width: $tablet) {
+            flex-direction: column;
+        }
+    }
+}
+
+//==========================================================================================
+.filter-catalog {
+    background: #fefefe;
+    box-shadow: 0px 4px 20px rgba(0, 0, 0, 0.15);
+    &__title {
+        width: 100%;
+        background-color: $mainDarkColor;
+        color: #fff;
+        font-weight: bold;
+        font-size: rem(20);
+        line-height: math.div(24, 20);
+        padding: rem(20) rem(30);
+    }
+}
+
+//=======================================================================================
+.price-filter {
+    padding: rem(30);
+    &__title {
+        display: flex;
+        justify-content: space-between;
+        align-items: center;
+        flex-direction: row-reverse;
+        width: 100%;
+        font-weight: 600;
+        font-size: rem(20);
+        line-height: math.div(24, 20);
+        font-family: $fontFamily !important;  
+        &::before {
+            font-family: 'icomoon' !important;
+            color: $mainOrange;
+            font-size: rem(14);
+            transform: rotate(-180deg);
+            transition: transform .3s ease 0s;
+        }
+        &._spoller-active {
+            &::before{
+                transform: rotate(0); 
+            }
+        }
+    }
+    &__items {
+        // @media (max-width: $tablet) {
+        //     display: none;
+        //     &._active {
+        //         display: block;
+        //     }
+        // }
+    }
+    &__body {
+        padding: rem(30) 0 0 0;
+    }
+    &__inputs {
+        display: flex;
+        border-radius: rem(3);
+        overflow: hidden;
+        border: 1px solid #cbcbcb;
+        &:not(:last-child) {
+            margin-bottom: rem(60);
+        }
+    }
+    &__input {
+        width: 50%;
+        height: rem(42);
+        text-align: center;
+        padding: rem(0) rem(15);
+        &:not(:last-child) {
+            border-right: 1px solid #cbcbcb;
+        }
+    }
+}
+
+//======================================================================================
+.item-filter-catalog {
+    &__title {
+        padding: rem(13) rem(30);
+        background-color: $mainDarkColor;
+        color: #fff;
+        width: 100%;
+        display: flex;
+        justify-content: space-between;
+        align-items: center;
+        flex-direction: row-reverse;
+        width: 100%;
+        font-weight: 600;
+        font-size: rem(20);
+        line-height: math.div(24, 20);
+        font-family: $fontFamily !important;
+        &::before {
+            font-family: 'icomoon' !important;
+            color: $mainOrange;
+            font-size: rem(14);
+            transform: rotate(-180deg);
+            transition: transform .3s ease 0s;
+        }
+        &._spoller-active {
+            &::before{
+                transform: rotate(0); 
+            }
+        }
+    }
+    &__body {
+        padding: rem(30);
+    }
+    &__checkbox {
+        &:not(:last-child) {
+            margin-bottom: rem(22);
+        }
+    }
+}
+.filter-length {
+    .price-filter__body {
+        padding: 0;
+    }
+    .item-filter-catalog__body {
+        padding: rem(20) rem(30) rem(40) rem(30);
+    } 
+    .noUi-tooltip {
+        display: none;
+    }
+    .price-filter__inputs {
+        &:not(:last-child) {
+            margin-bottom: rem(30);
+        }
+
+    }
+    
+}
+.filter-rating {
+    .checkbox__text {
+        font-size: rem(30);
+        color: $mainOrange;
+        letter-spacing: 5px;
+        line-height: math.div(20, 32);
+        display: flex;
+        align-items: center;
+        column-gap: rem(10);
+        small {
+            font-weight: 600;
+            font-size: rem(16);
+            line-height: math.div(20, 16);
+            color: $mainDarkColor;
+            letter-spacing: 1px;
+        }
+    }
+}
