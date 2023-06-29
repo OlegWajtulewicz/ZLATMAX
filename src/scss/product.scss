@@ -1,9 +1,6 @@
 .product {
     &__main {
         @include adaptiveValue("margin-bottom", 120, 40);
-    }
-    &__info {
-        //@include adaptiveValue("margin-bottom", 120, 40);
     } 
 }
 .main-product {
@@ -24,7 +21,8 @@
     display: grid;
     gap: rem(16);
     &__slide-ibg {
-        padding-bottom: percent(577, 754);
+        padding-bottom: percent(500, 590);
+
     }
 }
 .thumbs-images {
@@ -32,7 +30,7 @@
         cursor: pointer;
         opacity: 0.7;
         transition: all .3s ease 0s;
-        padding-bottom: percent(177, 755);
+        padding-bottom: percent(220, 755);
         &.swiper-slide-thumb-active {
             opacity: 1;
         }
@@ -46,8 +44,6 @@
     &__header {
         border-bottom: 1px solid rgba(20, 20, 20, 0.15);
         padding: rem(0) rem(0) rem(30) rem(0);
-       // display: flex;
-        //justify-content: space-between;
         display: grid;
         grid-template-columns: rem(210) 1fr;
         @media (max-width: $mobileSmall) {

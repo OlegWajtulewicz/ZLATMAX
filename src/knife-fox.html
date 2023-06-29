@@ -336,7 +336,7 @@
 
                                     <div class="product-info__feed-none feed-none-product">
                                         <div class="feed-none-product__text">У данного товара нет отзывов. Станьте первым, кто оставил отзыв об этом товаре!</div>
-                                        <button type="button" data-popup="#callback" class="feed-none-product__button button button_black">Написать отзыв</button>
+                                        <button type="button" data-popup="#feed" class="feed-none-product__button button button_black">Написать отзыв</button>
                                     </div>
                                     
                                 </div>
@@ -380,14 +380,14 @@
 
                                     <div class="delivery-product__moskov moskov-delivery">
                                         <div class="moskov-delivery__post">
-                                            <img src="@img/post/Russian_Post.jpg" alt="Post" class="moskov-delivery__img-ibg>
+                                            <img src="@img/post/Russian_Post.jpg" alt="Post" class="moskov-delivery__img-ibg">
                                             <div class="moskov-delivery__title">Почта России</div>
-                                        
+                                        </div>
                                         <div class="moskov-delivery__option">
                                            <div class="moskov-delivery__time">5-8 дней</div> 
                                            <div class="moskov-delivery__price icon-rubl">300</div>
                                         </div>
-                                    </div>
+                                    
                                     </div>
                                 </div>
                             </div>
@@ -413,6 +413,7 @@
 			@@include('html/_footer.htm',{})
 		</div>
 		@@include('html/_popup.htm',{})
+        @@include('html/_preloader.htm',{})
 		@@include('html/_js.htm',{})
 	</body>
 </html>

@@ -220,14 +220,14 @@
 					<div data-spollers="767.98" class="item-footer__spoller spoller-item-footer">
 						<div class="spoller-item-footer__item">
 							<button type="button" data-spoller class="spoller-item-footer__title"> НОВОСТНАЯ РАССЫЛКА</button>
-							<form data-dev action="#" class="spoller-item-footer__body footer-subscribe">
+							<form data-ajax data-validate data-required required data-popup-message="#thanks" action="files/sendmail/sendmail.php" class="spoller-item-footer__body footer-subscribe" method="POST">
 								<label for="subscribe-input" class="footer-subscribe__label">Подпишитесь прямо сейчас!</label>
 								<div class="footer-subscribe__line">
-									<input id="subscribe-input" autocomplete="off" type="text" name="form[]" data-error="Ошибка" data-required="email" placeholder="example@gmail.com" class="footer-subscribe__input">
+									<input id="subscribe-input" autocomplete="off" type="text" name="email" data-error="Ошибка" data-required="email" placeholder="example@gmail.com" class="footer-subscribe__input input" >
 									<button type="submit" class="footer-subscribe__button icon-arrow-bottom"></button>
 								</div>
 								<div class="footer-subscribe__checkbox checkbox checkbox-footer">
-									<input id="formAgreement" checked type="checkbox" name="agreement" class="checkbox-footer__input checkbox__input _req ">
+									<input id="formAgreement" checked type="checkbox" name="agreement" class="checkbox-footer__input checkbox__input input _req ">
 									<label for="formAgreement" class="checkbox-footer__label checkbox__label"><span>Я прочитал <a href="">Условия соглашения</a>  и 
 										согласен с условиями*</span></label>
 								</div>

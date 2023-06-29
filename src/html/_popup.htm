@@ -1,11 +1,82 @@
 <div id="callback" aria-hidden="true" class="popup">
 	<div class="popup__wrapper">
 		<div class="popup__content">
-			<button data-close type="button" class="popup__close">Закрыть</button>
-			<div class="popup__text">
+			<button data-close type="button" class="popup__close">&times;</button>
+
+			<form data-ajax data-popup-message="#thanks" data-validate data-required id="form" class="feed-form form__body" action="files/sendmail/sendmail.php" method="POST">
+				<input required name="name" placeholder="Name" type="text" class="form__input input">
+				<input required name="phone"  placeholder="Phone" type="tel" class="form__input input">
+				<input data-required="email" name="email"  placeholder="E-mail" type="email" class="form__input input ">
+	 
+				<button type="submit" class="button">Заказать звонок</button>   
+			</form>
+
+		</div>
+	</div>
+</div>
+
+<div id="login" aria-hidden="true" class="popup">
+	<div class="popup__wrapper">
+		<div class="popup__content">
+			<button data-close type="button" class="popup__close">&times;</button>
+
+			<form data-ajax data-popup-message="#thanks" data-validate data-required id="form2" class="feed-form form__body" action="files/sendmail/sendmail.php" method="POST">
 				
-				Здесь будет попап
-			</div>
+				
+				<input data-required="email" name="email"  placeholder="E-mail" type="email" class="form__input input ">
+				<div class="form__line">
+					<input autocomplete="off" name="form2[]" placeholder="Password" type="password" class="form__input input">
+					<button class="form__viewpass" type="button">Показать пароль</button>
+				</div>
+				
+				<button type="submit" class="button form__button">Вход</button>
+				<button type="submit" class="button">Регистрация</button>   
+			</form>
+
+		</div>
+	</div>
+</div>
+
+<div id="feed" aria-hidden="true" class="popup">
+	<div class="popup__wrapper">
+		<div class="popup__content">
+			<button data-close type="button" class="popup__close">&times;</button>
+			
+
+			<form data-ajax data-popup-message="#thanks" data-validate data-required id="form1" class="feed-form form__body" action="files/sendmail/sendmail.php" method="POST">
+				<input name="name"  placeholder="Name" type="text" class="form__input input">
+				<input name="email"  placeholder="E-mail" type="email" class="form__input input ">
+				<textarea name="message" placeholder="Message" id="formMessage" class="form__input input"></textarea>
+				<!-- <div class="file">
+					<div class="file__item">
+						<input id="formImage" accept=".jpg, .png, .gif" type="file" name="image" class="file__input">
+						<div class="file__button">Выбрать фото</div>
+					</div>
+					<div id="formPreview" class="file__preview"></div>
+				</div> -->
+	 
+				<button type="submit" class="button">Отправить</button>   
+			</form>
+
+		</div>
+	</div>
+</div>
+
+
+
+<div id="thanks" aria-hidden="true" class="popup">
+	<div class="popup__wrapper">
+		<div class="popup__content">
+			<button data-close type="button" class="popup__close">&times;</button>
+			 <div class="popup__text">
+				
+	<div class="modal__subtitle">Thanks! Your message was sent successfully.</div>
+	
+				
+			</div>  
+
+	
+
 		</div>
 	</div>
 </div>

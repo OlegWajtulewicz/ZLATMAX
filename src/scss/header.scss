@@ -169,12 +169,6 @@
 			@include adaptiveValue("padding-left", 158, -300, 1620, 1620, 1);
 		}
     }
-	&__actions {
-		@media (min-width: $tablet) {
-			display: none;
-		}
-	}
-
 }
 //===============================================================
 .search-header {
@@ -252,9 +246,6 @@
 .phones-header {
 	position: relative;
 	z-index: 5;
-	&__items {
-		//display: flex;
-	}
 	&__cart {
 		padding-right: rem(25);
 		&::before {

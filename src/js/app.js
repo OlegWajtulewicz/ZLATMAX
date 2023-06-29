@@ -93,8 +93,8 @@ import * as flsForms from "./files/forms/forms.js";
 /* Документація: https://template.fls.guru/template-docs/rabota-s-formami.html */
 
 flsForms.formFieldsInit({
-	viewPass: false,
-	autoHeight: false
+	viewPass: true,
+	autoHeight: true
 });
 
 /* Надсилання форми */

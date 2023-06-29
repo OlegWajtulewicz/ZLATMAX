@@ -21,101 +21,119 @@ data-required="email" - вадидация E-mail
 Чтобы вывести текст ошибки, нужно указать его в атрибуте data-error
 */
 
-// Работа с полями формы. Добавление классов, работа с placeholder
 
-export function formFieldsInit() {
-	const formFields = document.querySelectorAll('input[placeholder],textarea[placeholder]');
-	if (formFields.length) {
-		formFields.forEach(formField => {
-			formField.dataset.placeholder = formField.placeholder;
-		});
-	}
+
+
+// Работа с полями формы. Добавление классов, работа с placeholder
+//=========================================================================================
+// const forms = document.forms;
+// const file = form.querySelector('input[type="file"]');
+// if (forms.length) {
+// 	for (const form of forms)
+	
+// 	file ? file.addEventListener('change', formAddFile) : null;
+// 	form.addEventListener('submit', formSubmitAction);
+// }
+
+// function formAddFile(e) {
+// 	const formInputFile = e.target;
+// 	const formFiles = formInputFile.files;
+// 	const fileName = formFiles.length ? formFiles[0].name : '';
+// 	formInputFile.parentElement.nextElementSibling.innerHTML = fileName;
+// }
+
+//==========================================================================================
+export function formFieldsInit(options = { viewPass: true, autoHeight: true }) {
 	document.body.addEventListener("focusin", function (e) {
 		const targetElement = e.target;
 		if ((targetElement.tagName === 'INPUT' || targetElement.tagName === 'TEXTAREA')) {
-			if (targetElement.dataset.placeholder) {
-				targetElement.placeholder = '';
+			if (!targetElement.hasAttribute('data-no-focus-classes')) {
+				targetElement.classList.add('_form-focus');
+				targetElement.parentElement.classList.add('_form-focus');
 			}
-			targetElement.classList.add('_form-focus');
-			targetElement.parentElement.classList.add('_form-focus');
-
 			formValidate.removeError(targetElement);
+			targetElement.hasAttribute('data-validate') ? formValidate.removeError(targetElement) : null;
 		}
 	});
 	document.body.addEventListener("focusout", function (e) {
 		const targetElement = e.target;
 		if ((targetElement.tagName === 'INPUT' || targetElement.tagName === 'TEXTAREA')) {
-			if (targetElement.dataset.placeholder) {
-				targetElement.placeholder = targetElement.dataset.placeholder;
+			if (!targetElement.hasAttribute('data-no-focus-classes')) {
+				targetElement.classList.remove('_form-focus');
+				targetElement.parentElement.classList.remove('_form-focus');
 			}
-			targetElement.classList.remove('_form-focus');
-			targetElement.parentElement.classList.remove('_form-focus');
-
 			// Моментальная валидация
-			if (targetElement.hasAttribute('data-validate')) {
-				formValidate.validateInput(targetElement);
-			}
+			targetElement.hasAttribute('data-validate') ? formValidate.validateInput(targetElement) : null;
 		}
 	});
-}
+	// Если включено, добавляем функционал "Показать пароль"
+	if (options.viewPass) {
+		document.addEventListener("click", function (e) {
+			let targetElement = e.target;
+			if (targetElement.closest('[class*="__viewpass"]')) {
+				let inputType = targetElement.classList.contains('_viewpass-active') ? "password" : "text";
+				targetElement.parentElement.querySelector('input').setAttribute("type", inputType);
+				targetElement.classList.toggle('_viewpass-active');
+			}
+		});
+	}
+	// Если включено, добавляем функционал "Автовысота"
+	if (options.autoHeight) {
+		const textareas = document.querySelectorAll('textarea[data-autoheight]');
+		if (textareas.length) {
+			textareas.forEach(textarea => {
+				const startHeight = textarea.hasAttribute('data-autoheight-min') ?
+					Number(textarea.dataset.autoheightMin) : Number(textarea.offsetHeight);
+				const maxHeight = textarea.hasAttribute('data-autoheight-max') ?
+					Number(textarea.dataset.autoheightMax) : Infinity;
+				setHeight(textarea, Math.min(startHeight, maxHeight))
+				textarea.addEventListener('input', () => {
+					if (textarea.scrollHeight > startHeight) {
+						textarea.style.height = `auto`;
+						setHeight(textarea, Math.min(Math.max(textarea.scrollHeight, startHeight), maxHeight));
+					}
+				});
+			});
+			function setHeight(textarea, height) {
+				textarea.style.height = `${height}px`;
+			}
+		}
+	}
 
-// export function formFieldsInit(options = { viewPass: false, autoHeight: false }) {
-// 	document.body.addEventListener("focusin", function (e) {
-// 		const targetElement = e.target;
-// 		if ((targetElement.tagName === 'INPUT' || targetElement.tagName === 'TEXTAREA')) {
-// 			if (!targetElement.hasAttribute('data-no-focus-classes')) {
-// 				targetElement.classList.add('_form-focus');
-// 				targetElement.parentElement.classList.add('_form-focus');
-// 			}
-// 			formValidate.removeError(targetElement);
-// 			targetElement.hasAttribute('data-validate') ? formValidate.removeError(targetElement) : null;
-// 		}
-// 	});
-// 	document.body.addEventListener("focusout", function (e) {
-// 		const targetElement = e.target;
-// 		if ((targetElement.tagName === 'INPUT' || targetElement.tagName === 'TEXTAREA')) {
-// 			if (!targetElement.hasAttribute('data-no-focus-classes')) {
-// 				targetElement.classList.remove('_form-focus');
-// 				targetElement.parentElement.classList.remove('_form-focus');
-// 			}
-// 			// Моментальная валидация
-// 			targetElement.hasAttribute('data-validate') ? formValidate.validateInput(targetElement) : null;
-// 		}
-// 	});
-// 	// Если включено, добавляем функционал "Показать пароль"
-// 	if (options.viewPass) {
-// 		document.addEventListener("click", function (e) {
-// 			let targetElement = e.target;
-// 			if (targetElement.closest('[class*="__viewpass"]')) {
-// 				let inputType = targetElement.classList.contains('_viewpass-active') ? "password" : "text";
-// 				targetElement.parentElement.querySelector('input').setAttribute("type", inputType);
-// 				targetElement.classList.toggle('_viewpass-active');
-// 			}
-// 		});
-// 	}
-// 	// Если включено, добавляем функционал "Автовысота"
-// 	if (options.autoHeight) {
-// 		const textareas = document.querySelectorAll('textarea[data-autoheight]');
-// 		if (textareas.length) {
-// 			textareas.forEach(textarea => {
-// 				const startHeight = textarea.hasAttribute('data-autoheight-min') ?
-// 					Number(textarea.dataset.autoheightMin) : Number(textarea.offsetHeight);
-// 				const maxHeight = textarea.hasAttribute('data-autoheight-max') ?
-// 					Number(textarea.dataset.autoheightMax) : Infinity;
-// 				setHeight(textarea, Math.min(startHeight, maxHeight))
-// 				textarea.addEventListener('input', () => {
-// 					if (textarea.scrollHeight > startHeight) {
-// 						textarea.style.height = `auto`;
-// 						setHeight(textarea, Math.min(Math.max(textarea.scrollHeight, startHeight), maxHeight));
-// 					}
-// 				});
-// 			});
-// 			function setHeight(textarea, height) {
-// 				textarea.style.height = `${height}px`;
-// 			}
-// 		}
-// 	}
-// }
+
+	// //Получаем инпут file в переменную
+	// const formImage = document.getElementById('formImage');
+	// //Получаем див для превью в переменную
+	// const formPreview = document.getElementById('formPreview');
+
+	// //Слушаем изменения в инпуте file
+	// formImage.addEventListener('change', () => {
+	// 	uploadFile(formImage.files[0]);
+	// });
+
+	// function uploadFile(file) {
+	// 	// провераяем тип файла
+	// 	if (!['image/jpeg', 'image/png', 'image/gif'].includes(file.type)) {
+	// 		alert('Разрешены только изображения.');
+	// 		formImage.value = '';
+	// 		return;
+	// 	}
+	// 	// проверим размер файла (<2 Мб)
+	// 	if (file.size > 2 * 1024 * 1024) {
+	// 		alert('Файл должен быть менее 2 МБ.');
+	// 		return;
+	// 	}
+
+	// 	var reader = new FileReader();
+	// 	reader.onload = function (e) {
+	// 		formPreview.innerHTML = `<img src="${e.target.result}" alt="Фото">`;
+	// 	};
+	// 	reader.onerror = function (e) {
+	// 		alert('Ошибка');
+	// 	};
+	// 	reader.readAsDataURL(file);
+	// }
+}
 // Валидация форм
 export let formValidate = {
 	getErrors(form) {
@@ -225,6 +243,7 @@ export function formSubmit() {
 				const formAction = form.getAttribute('action') ? form.getAttribute('action').trim() : '#';
 				const formMethod = form.getAttribute('method') ? form.getAttribute('method').trim() : 'GET';
 				const formData = new FormData(form);
+				//formData.append('image', formImage.files[0]);
 
 				form.classList.add('_sending');
 				const response = await fetch(formAction, {
